@@ -5,11 +5,10 @@ This is a hands-on project based on AWS tutorials to build a fullstack React app
 ## Initial Setup
 
 1. **AWS SSO and CLI**
-   - Configure an SSO session and AWS profile for Amplify:
+   - Configure an SSO session and AWS profile for Amplify. Create a profile (e.g., `profile-name`) and note the `sso_start_url`, `sso_account_id`, `sso_role_name`:
      ```bash
      aws configure sso
      ```
-   - Create a profile (e.g., `profile-name`) and note the `sso_start_url`, `sso_account_id`, `sso_role_name`.
    - Login to the profile:
      ```bash
      aws sso login --profile profile-name
