@@ -9,10 +9,10 @@ This is a hands-on project based on AWS tutorials to build a fullstack React app
      ```bash
      aws configure sso
      ```
-   - Create a profile (e.g., `nico-admin`) and note the `sso_start_url`, `sso_account_id`, `sso_role_name`.
+   - Create a profile (e.g., `profile-name`) and note the `sso_start_url`, `sso_account_id`, `sso_role_name`.
    - Login to the profile:
      ```bash
-     aws sso login --profile nico-admin
+     aws sso login --profile profile-name
      ```
 
 2. **Amplify CLI / Sandbox**
