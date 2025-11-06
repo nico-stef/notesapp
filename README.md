@@ -1,16 +1,46 @@
-# React + Vite
+# NotesApp - AWS tutorial
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a hands-on project based on AWS tutorials to build a fullstack React application with Amplify.  
 
-Currently, two official plugins are available:
+## Initial Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. **AWS SSO and CLI**
+   - Configure an SSO session and AWS profile for Amplify:
+     ```bash
+     aws configure sso
+     ```
+   - Create a profile (e.g., `nico-admin`) and note the `sso_start_url`, `sso_account_id`, `sso_role_name`.
+   - Login to the profile:
+     ```bash
+     aws sso login --profile nico-admin
+     ```
 
-## React Compiler
+2. **Amplify CLI / Sandbox**
+   - Install Node.js and npm if not already installed: [https://nodejs.org](https://nodejs.org)
+   - Install Amplify CLI globally:
+     ```bash
+     npm install -g @aws-amplify/cli
+     ```
+   - Install `ampx` globally for sandbox:
+     ```bash
+     npm install -g ampx
+     ```
+   - Start the sandbox environment using your profile:
+     ```bash
+     npx ampx sandbox --profile profile-name
+     ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Development Workflow
 
-## Expanding the ESLint configuration
+- **Frontend:** uses Amplify SDK / DataStore to access the backend.
+- **CRUD for Notes:**
+  - `data.Note.create({...})` → POST / create
+  - `data.Note.query()` → GET / list
+- Changes made in the local backend (sandbox) are applied **only when the sandbox is running**.  
+- If the sandbox is stopped, the frontend uses the last deployed backend in AWS cloud.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Notes
+
+- SSO tokens expire after a certain period (usually 1-12 hours), so you need to log in again periodically:
+  ```bash
+  aws sso login --profile nico-admin
